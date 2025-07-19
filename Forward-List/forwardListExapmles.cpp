@@ -44,6 +44,31 @@ int main(){
         std::cout<<number<< " ";
     }std::cout<<std::endl;
 
+    // point iterator to the 2nd position of the forward list
+    auto int_itr = integer_forward_list.begin();
+    std::advance(int_itr, 1);
+
+    auto string_itr = string_forward_list.begin();
+    std::advance(string_itr, 1);
+
+
+    // insert integer element at the 3rd position
+    integer_forward_list.insert_after(int_itr, 6);
+
+    // insert string element at the 3rd position
+    string_forward_list.insert_after(string_itr, "Calm");
+
+    
+    std::cout<<"String forward list after insert_after(): ";
+    for(const std::string& val : string_forward_list){
+        std::cout<<val<<" ";
+    }std::cout<<std::endl;
+
+    std::cout<<"Integer forward list after insert_after(): ";
+    for(const int& number : integer_forward_list){
+        std::cout<<number<< " ";
+    }std::cout<<std::endl;
+
     return 0;
 }
 /*
