@@ -69,6 +69,27 @@ int main(){
         std::cout<<number<< " ";
     }std::cout<<std::endl;
 
+    // replace the entire content of the forward list
+    // with new elements 3 and 4
+    integer_forward_list.assign({3, 4});
+
+    // replace the entire content of the forward list
+    // with new elements calm and charming
+    string_forward_list.assign({"calm", "charming"});
+
+
+    std::cout << "\nString Forward List after assign(): ";
+    for (const int& element : integer_forward_list) {
+        std::cout << element << " ";
+    }
+    std::cout << std::endl;
+
+    std::cout << "\nInteger Forward List after assign(): ";
+    for (const std::string& element : string_forward_list) {
+        std::cout << element << " ";
+    }
+    std::cout << std::endl;
+
     return 0;
 }
 /*
