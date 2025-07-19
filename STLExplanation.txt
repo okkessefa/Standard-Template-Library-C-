@@ -1,0 +1,63 @@
+C++ Standard Template Library
+In C++, the Standard Template Library (STL) provides a set of programming tools to implement algorithms and data structures like vectors, lists, queues, etc.
+
+STL implements these data structures and algorithms using general-purpose classes and functions that have been tested rigorously.
+
+C++ STL has 3 major components:
+
+Containers
+Iterators
+Algorithms
+In addition to these, STL also provides several other features, including function objects, smart pointers, and exception handling mechanisms.
+
+C++ STL Containers
+STL containers store data and organize them in a specific manner as required.
+
+For example, vectors store data of the same type in a sequential order. Whereas, maps store data in key-value pairs.
+
+
+
+
+We can classify STL containers into 3 types:
+1. Sequence containers:
+
+Array
+Vector
+Queue
+Deque
+Forward_list
+List
+2. Associative containers:
+
+Set
+Multiset
+Map
+Multimap
+3. Unordered associative containers:
+
+Unordered_set
+Unordered_multiset
+Unordered_map
+Unordered_multimap
+
+
+
+Types of STL Container in C++
+In C++, there are generally 3 kinds of STL containers:
+
+Sequential Containers
+Associative Containers
+Unordered Associative Containers
+
+1. Sequential Containers in C++
+In C++, sequential containers allow us to store elements that can be accessed in sequential order.
+
+Internally, sequential containers are implemented as arrays or linked lists data structures.
+
+Types of Sequential Containers
+
+Array
+Vector
+Deque
+List
+Forward List

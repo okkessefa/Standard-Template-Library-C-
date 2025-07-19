@@ -1,0 +1,22 @@
+# Ignore Visual Studio Code settings
+.vscode/
+
+# Ignore executable files
+*.exe
+
+# Ignore object and compiled output
+*.out
+*.o
+
+# Ignore MacOS system files
+.DS_Store
+
+# Ignore temporary files
+*~
+*.log
+
+# Ignore CMake or Makefile outputs
+CMakeFiles/
+CMakeCache.txt
+Makefile
+cmake_install.cmake
