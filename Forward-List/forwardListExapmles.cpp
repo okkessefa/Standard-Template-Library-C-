@@ -22,6 +22,7 @@ int main(){
         std::cout<<val<<" ";
     }std::cout<<std::endl;
 
+    /*
     // access the first element
     int first_element_integer = integer_forward_list.front();
     
@@ -90,6 +91,54 @@ int main(){
     }
     std::cout << std::endl;
 
+    // Deletes the first element of rgw list
+    
+    string_forward_list.pop_front();
+    integer_forward_list.pop_front();
+    
+    // printing the lists after being modified
+    std::cout << "\nInteger Forward List after pop_front(): ";
+    for(const int& number : integer_forward_list){
+        std::cout<<number<<" ";
+    }std::cout<<std::endl;
+    
+    std::cout << "\nString Forward List after pop_front(): ";
+    for(const std::string str : string_forward_list){
+        std::cout<<str<<" ";
+    }std::cout<<std::endl;
+    
+    // deletes all accurrences of the specified element from the list
+    
+    string_forward_list.remove("Affectionate");
+    integer_forward_list.remove(4);
+    
+    // printing the lists after being modified
+    std::cout << "\nInteger Forward List after remove(): ";
+    for(const int& number : integer_forward_list){
+        std::cout<<number<<" ";
+    }std::cout<<std::endl;
+    
+    std::cout << "\nString Forward List after remove(): ";
+    for(const std::string str : string_forward_list){
+        std::cout<<str<<" ";
+    }std::cout<<std::endl;
+    
+    // Deletes all the elements from the list
+    string_forward_list.clear();
+    integer_forward_list.clear();
+    
+    // printing the lists after being modified
+    std::cout << "\nInteger Forward List after clear(): ";
+    for(const int& number : integer_forward_list){
+        std::cout<<number<<" ";
+    }std::cout<<std::endl;
+    
+    std::cout << "\nString Forward List after clear(): ";
+    for(const std::string str : string_forward_list){
+        std::cout<<str<<" ";
+    }std::cout<<std::endl;
+    */
+
     return 0;
 }
 /*
@@ -98,11 +147,11 @@ Some of the most common methods used with forward lists are listed below:
 
         Functions 	          Description
         
-        front()	              Access the front element. 
-        push_front()	      Add an element to the start of the list.
-        insert_after() 	      Add an element at the position right after the given position.
-        assign()	          Assign new contents to the list by replacing the current contents.
-        pop_front()	          Remove the element at the front.
-        remove()	          Remove elements with specific values.
-        clear()	              Delete all the contents of the list.
+✅    front()	              Access the front element. 
+✅      push_front()	          Add an element to the start of the list.
+✅      insert_after() 	      Add an element at the position right after the given position.
+✅      assign()	              Assign new contents to the list by replacing the current contents.
+✅      pop_front()	          Remove the element at the front.
+        remove()	           Remove elements with specific values.
+        clear()	               Delete all the contents of the list.
 */
