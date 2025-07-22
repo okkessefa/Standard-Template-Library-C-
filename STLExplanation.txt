@@ -61,3 +61,9 @@ Vector
 Deque
 List
 Forward List
+
+
+C++ Queue
+In C++, the STL queue provides the functionality of a queue data structure.
+
+The queue data structure follows the FIFO (First In First Out) principle where elements that are added first will be removed first.
