@@ -67,3 +67,13 @@ C++ Queue
 In C++, the STL queue provides the functionality of a queue data structure.
 
 The queue data structure follows the FIFO (First In First Out) principle where elements that are added first will be removed first.
+
+In C++, the STL deque is a sequential container that provides the functionality of a double-ended queue data structure.
+
+In a regular queue, elements are added from the rear and removed from the front. However, in a deque, we can insert and remove elements from both the front and rear.
+
+Types of Deque
+Input Restricted Deque
+In this deque, input is restricted at a single end but allows deletion at both the ends.
+Output Restricted Deque
+In this deque, output is restricted at a single end but allows insertion at both the ends.
