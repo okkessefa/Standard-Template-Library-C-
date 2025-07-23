@@ -10,7 +10,7 @@ void swap(int *a, int *b){
    *a = *b;
    *b = temp;
 }                             // Swap two integer values via pointers
-void heapify(std::vector<int>& tree, int index){       // Restore max-heap property from a given index downwards
+void heapify(std::vector<int> &tree, int index){       // Restore max-heap property from a given index downwards
     // Initialize the variable
     int size = tree.size();
     int largest = index;
@@ -42,8 +42,27 @@ void insert(std::vector<int>& tree, int NewNum){       // Insert a new element i
     void printArray(std::vector<int>& tree){               // Print the contents of the heap as an array
     for(const int num : tree) std::cout<<num<<" "; std::cout<<std::endl;
 }
-void deleteNode(std::vector<int>& tree, int TodeleteNum); // Remove a specified element from the heap
+void deleteNode(std::vector<int>& tree, int TodeleteNum){ // Remove a specified element from the heap
+    int size = tree.size();
+    int i;
+    for(i = 0; i<size; i++){
+        if(TodeleteNum == tree[i]) break;
+    }
+    std::cout <<"For loop is working" <<std::endl;
+    swap(&tree[i], &tree[size-1]);
+    tree.pop_back();
+    std::cout <<"deleting process is working" <<std::endl;
 
+    size = tree.size();
+    std::cout <<"Size re-initialized" <<std::endl;
+    std::cout <<"Tree size:" << size<<std::endl;
+
+
+    for(int i = 0; i < size; i++) {
+        std::cout <<"Heapfiy re-calling time: " << i<<std::endl; 
+        heapify(tree, i); 
+    }
+}
 int main()
 {
     // Initialize an empty vector to represent the heap
@@ -63,9 +82,9 @@ int main()
     printArray(heapTree);
 
     // Delete a specified value (4) and maintain the heap property
-    // deleteNode(heapTree, 4);
-    // std::cout << "After deleting an element: ";
-    // printArray(heapTree);
+    deleteNode(heapTree, 4);
+    std::cout << "After deleting an element: ";
+    printArray(heapTree);
 
     return 0;
 }
