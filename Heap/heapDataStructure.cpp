@@ -11,8 +11,26 @@ void swap(int *a, int *b){
    *b = temp;
 }                             // Swap two integer values via pointers
 void heapify(std::vector<int>& tree, int index);       // Restore max-heap property from a given index downwards
-void insert(std::vector<int>& tree, int NewNum);       // Insert a new element into the max-heap
-void printArray(std::vector<int>& tree);               // Print the contents of the heap as an array
+void insert(std::vector<int>& tree, int NewNum){       // Insert a new element into the max-heap
+    tree.push_back(NewNum);
+    int current = tree.size() - 1;
+
+    // Control for whether the element is positioned correctly
+    while(current > 0){
+        // Tempoarary value for checking the value position with refernce
+        int parent = (current - 1) / 2;
+        // The value of each node is less than or equal to the value of its parent, with the maximum value at the root
+        if(tree[current] > tree[parent]){
+            swap(&tree[current], &tree[parent]);
+            current = parent;
+        }else{
+            break;
+        }
+    }
+}
+    void printArray(std::vector<int>& tree){               // Print the contents of the heap as an array
+    for(const int num : tree) std::cout<<num<<" "; std::cout<<std::endl;
+}
 void deleteNode(std::vector<int>& tree, int TodeleteNum); // Remove a specified element from the heap
 
 int main()
@@ -32,9 +50,9 @@ int main()
     printArray(heapTree);
 
     // Delete a specified value (4) and maintain the heap property
-    deleteNode(heapTree, 4);
-    std::cout << "After deleting an element: ";
-    printArray(heapTree);
+    // deleteNode(heapTree, 4);
+    // std::cout << "After deleting an element: ";
+    // printArray(heapTree);
 
     return 0;
 }
