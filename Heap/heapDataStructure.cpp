@@ -4,7 +4,12 @@
 #include <vector>
 
 // Function declarations
-void swap(int *a, int *b);                             // Swap two integer values via pointers
+void swap(int *a, int *b){
+    // swaping the values with temporary value
+   int temp = *a;
+   *a = *b;
+   *b = temp;
+}                             // Swap two integer values via pointers
 void heapify(std::vector<int>& tree, int index);       // Restore max-heap property from a given index downwards
 void insert(std::vector<int>& tree, int NewNum);       // Insert a new element into the max-heap
 void printArray(std::vector<int>& tree);               // Print the contents of the heap as an array
