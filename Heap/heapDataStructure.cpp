@@ -10,7 +10,18 @@ void swap(int *a, int *b){
    *a = *b;
    *b = temp;
 }                             // Swap two integer values via pointers
-void heapify(std::vector<int>& tree, int index);       // Restore max-heap property from a given index downwards
+void heapify(std::vector<int>& tree, int index){       // Restore max-heap property from a given index downwards
+    // Initialize the variable
+    int size = tree.size();
+    int largest = index;
+    // if a node is stored an index k, then its left child is stored at index 2k + 1 and its right child at index 2k + 2
+    int left = 2*index +1;
+    int right = 2* index +2;
+
+    if( (left < size) && (&tree[left] > &tree[largest]) ) largest = left;
+    if( (right < size) && (&tree[right] > &tree[largest]) ) largest = right;
+    if(largest != index) swap(&tree[index], &tree[largest]); heapify(tree, largest);
+}
 void insert(std::vector<int>& tree, int NewNum){       // Insert a new element into the max-heap
     tree.push_back(NewNum);
     int current = tree.size() - 1;
@@ -40,10 +51,12 @@ int main()
 
     // Insert elements into the heap (bubble-up approach)
     insert(heapTree, 3);
-    insert(heapTree, 4);
     insert(heapTree, 9);
-    insert(heapTree, 5);
     insert(heapTree, 2);
+    insert(heapTree, 1);
+    insert(heapTree, 4);
+    insert(heapTree, 5);
+    insert(heapTree, 7);
 
     // Display the heap after insertions
     std::cout << "Max-Heap array: ";
