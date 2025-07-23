@@ -77,3 +77,82 @@ Input Restricted Deque
 In this deque, input is restricted at a single end but allows deletion at both the ends.
 Output Restricted Deque
 In this deque, output is restricted at a single end but allows insertion at both the ends.
+
+Priority Queue
+A priority queue is a special type of queue in which each element is associated with a priority 
+and is served according to its priority. If elements with the same priority occur, 
+they are served according to their order in the queue.
+
+Before the learning the Priority Queue there are some benefit to look at heap topic
+
+Heap Data Structure
+Heap data structure is a complete binary tree that 
+satisfies the heap property, where any given node is
+
+always greater than its child node/s and 
+the key of the root node is the largest among all other nodes. 
+This property is also called max heap property.
+always smaller than the child node/s and 
+the key of the root node is the smallest among all other nodes. 
+This property is also called min heap property.
+
+Heap Operations
+Some of the important operations performed on a 
+heap are described below along with their algorithms.
+
+Heapify
+Heapify is the process of creating a heap data structure 
+from a binary tree. It is used to create a Min-Heap or a Max-Heap.
+
+Algorithm
+
+Heapify(array, size, i)
+  set i as largest
+  leftChild = 2i + 1
+  rightChild = 2i + 2
+  
+  if leftChild > array[largest]
+    set leftChildIndex as largest
+  if rightChild > array[largest]
+    set rightChildIndex as largest
+
+  swap array[i] and array[largest]
+To create a Max-Heap:
+
+MaxHeap(array, size)
+  loop from the first index of non-leaf node down to zero
+    call heapify
+
+    Insert Element into Heap
+Algorithm for insertion in Max Heap
+
+If there is no node, 
+  create a newNode.
+else (a node is already present)
+  insert the newNode at the end (last node from left to right.)
+  
+heapify the array
+
+Delete Element from Heap
+Algorithm for deletion in Max Heap
+
+If nodeToBeDeleted is the leafNode
+  remove the node
+Else swap nodeToBeDeleted with the lastLeafNode
+  remove noteToBeDeleted
+   
+heapify the array
+
+Peek (Find max/min)
+Peek operation returns the maximum element 
+from Max Heap or minimum element 
+from Min Heap without deleting the node.
+
+For both Max heap and Min Heap
+
+return rootNode
+Extract-Max/Min
+Extract-Max returns the node with maximum value 
+after removing it from a Max Heap whereas 
+Extract-Min returns the node with minimum 
+after removing it from Min Heap.
