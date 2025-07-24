@@ -38,27 +38,35 @@ void insert(std::vector<int>& tree, int& size, int NewNum){       // Insert a ne
             break;
         }
     }
-    std::cout <<"Tree size:" << size<<std::endl;
 
 }
 void printArray(std::vector<int>& tree){               // Print the contents of the heap as an array
     for(const int num : tree) {std::cout<<num<<" "; } std::cout<<std::endl;
 }
-void deleteNode(std::vector<int>& tree, int& size, int TodeleteNum){ // Remove a specified element from the heap
+void deleteNode(std::vector<int>& tree, int& size, int TodeleteNum) {
+    // Return immediately if the heap is empty
     if (size == 0) return;
+
     int i;
-    for(i = 0; i<size; i++){
-        if(TodeleteNum == tree[i]) break;
+    // Search for the index of the element to be deleted
+    for (i = 0; i < size; i++) {
+        if (TodeleteNum == tree[i]) break;
     }
-    std::cout <<"For loop is working" <<std::endl;
-    swapfunc(&tree[i], &tree[size-1]);
+
+    // Swap the found element with the last element in the heap
+    // (Assumes swapfunc correctly swaps values via pointers)
+    swapfunc(&tree[i], &tree[size - 1]);
+
+    // Decrease the logical heap size to reflect removal
     size--;
+
+    // Remove the last element physically from the vector
     tree.pop_back();
 
-    std::cout <<"Tree size:" << size<<std::endl;
-    for(int k = 0; k < size; k++) {
-        std::cout <<"Heapfiy re-calling time: " << k<<std::endl; 
-        heapify(tree, size, k); 
+    // Re-heapify the entire heap to restore the max-heap property
+    // Note: This is O(n log n). For better performance, consider heapify only from index i
+    for (int k = 0; k < size; k++) {
+        heapify(tree, size, k);
     }
 }
 int main()
