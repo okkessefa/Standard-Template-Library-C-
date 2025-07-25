@@ -6,3 +6,16 @@ Balanced Tree Implementation: Most map implementations use a balanced tree, ensu
 
 In C++, a map stores elements in a sorted order, whereas an unordered_map does not. This distinction can be crucial depending on your use case.
 The basic distinction between a map and an unordered_map in C++ is that the former provides better performance properties than the latter. The map in C++ is implemented as a balanced binary search tree, basically Red-Black Tree. This suggests that, for the insertion, deletion, and lookup time, is O(logn). On the other hand, an unordered_map in C++ is implemented using a hash table that has other case and constant time complexity, O(1) for these operations.
+
+
+Use Cases
+Choosing between a map and an unordered_map depends on your specific needs:
+
+Use map when:
+You need the elements to be sorted by keys.
+You require range-based operations like finding all elements within a specific range of keys.
+The overhead of maintaining order is acceptable for your use case.
+Use unordered_map when:
+You prioritize performance and do not need elements to be in any particular order.
+You can ensure a good hash function to minimize collisions.
+The constant-time complexity of operations is more beneficial for your application.
