@@ -70,7 +70,7 @@ void PrintArray(std::vector<int> &Array, int size){
 int main() {
     std::vector<int> Array = {6, 5, 12, 10, 9, 1};
     //int size = sizeof(Array)/sizeof(Array[0]);
-    int size = Array.size(); std::cout<<size<<std::endl;
+    int size = Array.size(); 
     MergeSort(Array, 0, size - 1);
     std::cout << "Sorted array: \n";
     PrintArray(Array, size);
