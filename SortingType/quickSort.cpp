@@ -46,7 +46,7 @@ void quickSort(std::vector<int>& List, int leftmostIndex, int rightmostIndex){
     if(leftmostIndex < rightmostIndex){    
         // Partition the array and get the pivot index
         int pi = partition(List, leftmostIndex, rightmostIndex);
-
+        
         // Recursively apply quicksort to the left subarray
         quickSort(List, leftmostIndex, pi);
 

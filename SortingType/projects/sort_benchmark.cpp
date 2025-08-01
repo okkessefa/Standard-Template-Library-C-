@@ -4,9 +4,42 @@
 #include <algorithm> // For std::generate
 #include <random>
 
+void swapelement(int* a, int* b){
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
 // Sorting algorithms
-void partition(std::vector<int>& arr, int leftmostindex, int rightmostindex);
-void quicksort(std::vector<int>& arr, int left, int right);
+int partition(std::vector<int>& arr, int leftmostindex, int rightmostindex){
+    int pivot = arr[leftmostindex];
+    int i = leftmostindex;
+    int j = rightmostindex;
+
+    while(i< j){
+        do{
+            i++;
+        }while(i < rightmostindex && arr[i] <= pivot);
+        do{
+            j--;
+        }while(j > leftmostindex && arr[j] > pivot);
+        if(i < j){
+            swapelement(&arr[i], &arr[j]);
+        }
+    }
+    swapelement(&arr[leftmostindex], &arr[j]);
+    
+    return j;
+
+
+}
+void quicksort(std::vector<int>& arr, int left, int right){
+    if(left< right){
+        int pi = partition(arr, left, right);
+
+        quicksort(arr, left, pi);
+        quicksort(arr, pi + 1, right);
+    }
+}
 
 void mergesort(std::vector<int>& arr, int left, int right);
 void merge(std::vector<int>& arr, int left, int mid, int right);
