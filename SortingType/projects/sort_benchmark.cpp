@@ -120,7 +120,7 @@ void mergesort(std::vector<int> &Array, int left, int right){
 std::vector<int> generateRandomArray(int size){
     std::vector<int> array(size);
 
-    // Create a random number generator between 0 to 100
+    // Create a random number generator between 0 to size times 10 (to be obtain more wived range) 
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(0, size  * 10);
