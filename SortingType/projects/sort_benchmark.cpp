@@ -3,6 +3,7 @@
 #include <chrono> // for timing
 #include <algorithm> // For std::generate
 #include <random>
+#include <functional>
 
 // swap function with classic method
 void swapelement(int* a, int* b){
@@ -122,7 +123,7 @@ std::vector<int> generateRandomArray(int size){
     // Create a random number generator between 0 to 100
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(0, size * 10);
+    std::uniform_int_distribution<> dis(0, size  * 10);
 
     // Initialize vector elements with random values
     for (int& value : array)
@@ -130,8 +131,8 @@ std::vector<int> generateRandomArray(int size){
     return array;
 }
 // Measuring Time
-int benchmarkSort(void(*sortfunc)(std::vector<int>&), std::vector<int> arr){
-    
+int benchmarkSort(const std::function<void(std::vector<int>&)>& sortfunc, std::vector<int> arr)
+{
     // Get starting timepoint
     auto start = std::chrono::high_resolution_clock::now();
     // Call the function, here sort()
@@ -143,15 +144,31 @@ int benchmarkSort(void(*sortfunc)(std::vector<int>&), std::vector<int> arr){
     // get duration. To cast it to proper unit
     // use duration cast method
     // To get the value of duration use the count()
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(finish-start).count();
-    
-    return duration;
+    return std::chrono::duration_cast<std::chrono::microseconds>(finish-start).count();
+}
+
+void runBenchmark(const std::function<void(std::vector<int>&)>& sortFunc, const std::string& label, int& size)
+{
+    std::vector<int> arr = generateRandomArray(size);
+    int duration = benchmarkSort(sortFunc, arr);
+    std::cout<<"<------------------------------------------------------------------>"<<std::endl;
+    std::cout<<label<<"      "<<":"<<duration<<" ms."<<std::endl;
+    std::cout<<"<------------------------------------------------------------------>"<<std::endl;
 }
 
 int main(){
     //Menu flow
     int option;
     int sizeOption;
+
+    auto merge_lambda = [](std::vector<int>& v){
+        mergesort(v, 0 ,v.size() -1);
+    };
+
+    auto quick_lambda = [](std::vector<int>& a){
+        quicksort(a, 0 ,a.size());
+    };
+
     do{
         std::cout<<"<------------------------------------------------------------------>"<<std::endl;
         std::cout<<"<----------------Benchmark Sort Comparison CLI Tool---------------->"<<std::endl;
@@ -162,7 +179,7 @@ int main(){
         std::cout<<"<----Optıon 4: Quit"<<std::endl;
         std::cout<<"Enter your option: ";
         std::cin>>option;
-        if (option== 4) break;
+        if (option== 4){ break;}
         std::cout<<"Enter input size: ";
         std::cin>>sizeOption;
         std::cout<<"<------------------------------------------------------------------>"<<std::endl;
@@ -171,44 +188,16 @@ int main(){
         
         if(option == 1)
         {
-            std::vector<int> m_arr = generateRandomArray(sizeOption);
-            auto mergesort_wrapper = [](std::vector<int>& v){
-                mergesort(v, 0 , v.size()- 1);
-            };
-            int durationMerge = benchmarkSort(mergesort_wrapper, m_arr);
-            std::cout<<"<------------------------------------------------------------------>"<<std::endl;
-            std::cout<<" Merge Sort      "<<":"<<durationMerge<<" ms"<<std::endl;
-            std::cout<<"<------------------------------------------------------------------>"<<std::endl;
+            runBenchmark(merge_lambda, " Merge Sort", sizeOption); 
         }
         else if(option == 2)
         {
-            std::vector<int> q_arr = generateRandomArray(sizeOption);
-            auto quicksort_wrapper = [](std::vector<int>& a){
-                quicksort(a, 0, a.size());
-            };
-            int durationquick = benchmarkSort(quicksort_wrapper, q_arr);
-            std::cout<<"<------------------------------------------------------------------>"<<std::endl;
-            std::cout<<" Quick Sort      "<<":"<<durationquick<<" ms"<<std::endl;
-            std::cout<<"<------------------------------------------------------------------>"<<std::endl;     
+            runBenchmark(quick_lambda, " Quick Sort", sizeOption);    
         }
         else if(option == 3)
         {
-            std::vector<int> m_arr = generateRandomArray(sizeOption);
-            auto mergesort_wrapper = [](std::vector<int>& v){
-                mergesort(v, 0 , v.size()- 1);
-            };
-            int durationMerge = benchmarkSort(mergesort_wrapper, m_arr);
-            //----------------------------------------------------------
-            std::vector<int> q_arr = generateRandomArray(sizeOption);
-            auto quicksort_wrapper = [](std::vector<int>& a){
-                quicksort(a, 0, a.size());
-            };
-            int durationquick = benchmarkSort(quicksort_wrapper, q_arr);
-            std::cout<<"<------------------------------------------------------------------>"<<std::endl;
-            std::cout<<" Merge Sort      "<<":"<<durationMerge<<" ms"<<std::endl;
-            std::cout<<"<------------------------------------------------------------------>"<<std::endl;
-            std::cout<<" Quick Sort      "<<":"<<durationquick<<" ms"<<std::endl;
-            std::cout<<"<------------------------------------------------------------------>"<<std::endl;
+            runBenchmark(merge_lambda, " Merge Sort", sizeOption); 
+            runBenchmark(quick_lambda, " Quick Sort", sizeOption);    
         }
     }while(option != 4);
     return 0;
