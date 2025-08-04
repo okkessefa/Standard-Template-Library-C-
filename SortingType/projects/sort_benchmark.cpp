@@ -59,62 +59,43 @@ void quicksort(std::vector<int>& List, int leftmostIndex, int rightmostIndex){
 }
 
 // 2-> Merge Sort
-void Merge(std::vector<int> &Array, int left, int mid, int right){
-     // initialize the control pointer
-    int n1 = mid - left + 1;
-    int n2 = right - mid ;
+void iterativeMergeSort(std::vector<int>& arr) {
+    int n = arr.size();
+    std::vector<int> buffer(n);  // Shared buffer for all merge steps
 
-    if (n1 <= 0 || n2 <= 0) {
-        std::cerr << "Invalid subarray size\n";
-        return;
-    }
+    // Outer loop: grow merge width from 1, 2, 4, 8, ...
+    for (int width = 1; width < n; width *= 2) {
+        // Inner loop: merge adjacent blocks of size 'width'
+        for (int i = 0; i < n; i += 2 * width) {
+            int left = i;
+            int mid = std::min(i + width, n);
+            int right = std::min(i + 2 * width, n);
 
-     // Creating Temporary Containers
-    std::vector<int> L(n1); 
-    std::vector<int> M(n2);
+            // Merge arr[left:mid] and arr[mid:right] into buffer
+            int i1 = left;
+            int i2 = mid;
+            int k = left;
 
-    //  getting left and right part of array into two piece of array
-    for(int i = 0; i < n1; i++){
-        L[i] = Array[left + i];
-    }
-    for(int j = 0; j < n2; j++){
-        M[j] = Array[mid + 1 + j];
-    }
+            while (i1 < mid && i2 <= right) {
+                if (arr[i1] <= arr[i2]) {
+                    buffer[k++] = arr[i1++];
+                } else {
+                    buffer[k++] = arr[i2++];
+                }
+            }
 
-    // Re-set the controller to re-placement
-    int i = 0; int j = 0 ; int k = left;
+            // Copy any remaining elements
+            while (i1 < mid) buffer[k++] = arr[i1++];
+            while (i2 < right) buffer[k++] = arr[i2++];
 
-    while(i<n1 && j<n2){
-        if(L[i] <= M[j]){
-            Array.at(k) = L.at(i);
-            i++; k++;
-        }else{
-            Array.at(k) = M.at(j);
-            j++; k++;
+            // Copy merged part back to original array
+            for (int j = left; j < right; ++j) {
+                arr[j] = buffer[j];
+            }
         }
-    }// Adding  the elements that if there is reminded element in any container
-    while(i<n1){
-        Array.at(k) = L.at(i);
-        i++; k++;
-    }
-    while(j<n2){
-        Array.at(k) = M.at(j);
-        j++; k++;
-    }
-    // Delete after finishing the re-initalize the variables
-    
-}
-void mergesort(std::vector<int> &Array, int left, int right){
-    if(left < right){// continue to divide the array until being one element
-        int mid = left + (right - left) / 2; // Finding the order of middle elemeent
-
-        // Recursivly  getting left and right part
-        mergesort(Array, left, mid); // left part
-        mergesort(Array, mid + 1,  right); // right part
-        Merge(Array, left, mid, right); // When all elelements are just one element merge them into one array
-
     }
 }
+
 
 //Utility
 std::vector<int> generateRandomArray(int size){
@@ -162,7 +143,7 @@ int main(){
     int sizeOption;
 
     auto merge_lambda = [](std::vector<int>& v){
-        mergesort(v, 0 ,v.size() -1);
+        iterativeMergeSort(v);
     };
 
     auto quick_lambda = [](std::vector<int>& a){
